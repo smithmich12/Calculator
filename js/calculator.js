@@ -1,6 +1,4 @@
-
 function clickButton(operator) {
-  console.log(operator);
   switch(operator) {
     case "AC":
       document.getElementById("screen").value = "";
@@ -32,16 +30,17 @@ function solve(expression){
     } else if(!isNaN(character) && character != ' '){
       let num = "";
 
-      while(!isNaN(character) && character != ' '){
+      while((!isNaN(character) && character != ' ') || character == '.'){
         num += character;
         i++;
-        character = postfix[i];
+        character = postfix.charAt(i);
       }
       i--;
-      stack.push(parseInt(num));
+      stack.push(parseFloat(num));
     } else {
-      let val1 = parseInt(stack.pop());
-      let val2 = parseInt(stack.pop());
+      let val1 = stack.pop();
+      let val2 = stack.pop();
+      //console.log(val1);
       switch(character){
         case '+':
           stack.push(val1+val2);
@@ -69,24 +68,29 @@ function infixToPostfix(expression){
 
   let result = "";
   let stack = [];
-
   for(let i = 0; i < expression.length; i++) {
-
+    if(expression[i] == '.'){
+      result += expression[i];
+      continue;
+    }
     if(!isNaN(expression[i])){
       let n = 0;
       while(!isNaN(expression[i])){
         result += expression[i];
         i++
       }
+      if(expression[i] != '.'){
+        result += " ";
+      }
       i--;
-      result += ' ';
 
     } else if (expression[i] == '('){
       stack.push(expression[i]);
     } else if(expression[i] == ')'){
       while(stack.length > 0 && stack[stack.length - 1] != '('){
-        result += stack.pop();
+        result += stack.pop() + " ";
       }
+
       if(stack.length > 0 && stack[stack.length - 1] != '('){
         return -1;
       } else {
@@ -94,15 +98,20 @@ function infixToPostfix(expression){
       }
     }else{
       while(stack.length > 0 && pemdas(expression[i]) <= pemdas(stack[stack.length - 1])){
-        result += stack.pop();
+        result += stack.pop() + " ";
       }
+
       stack.push(expression[i]);
     }
 
   }
 
   while(stack.length > 0){
-    result += stack.pop();
+    if(stack.length != 1) {
+      result += stack.pop() + " ";
+    } else {
+      result += stack.pop();
+    }
   }
   if(result.indexOf("(") != -1){
     return -1;
