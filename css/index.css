@@ -3,6 +3,9 @@ html, body{
   width: 100%;
   margin: 0;
 }
+p {
+  text-align: center;
+}
 .container {
   position: absolute;
   margin: auto;
@@ -35,6 +38,22 @@ html, body{
   align-items: center;
 }
 
+.calc-item.screen input{
+  height: 100%;
+  width: 100%;
+  text-align: right;
+  background-color: #9C9F96;
+  color: black;
+  font-size: 40px;
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
+
+.calc-item.screen input:focus{
+  border: none;
+}
+
 .calc-item.screen{
   background-color: #9C9F96;
   color: black;
@@ -46,6 +65,9 @@ html, body{
 .calc-item.button{
   grid-row: span 1;
   grid-column: span 1;
+}
+.calc-item.button:active{
+  background: #3D3D3D;
 }
 
 .calc-item.zero {
