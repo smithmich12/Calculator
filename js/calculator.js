@@ -1,20 +1,31 @@
-function clickButton(operator) {
-  switch(operator) {
+// Click equals button if user presses enter in the input
+document.getElementById("screen").addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if(event.keyCode === 13) {
+    document.getElementById("equals").click();
+  }
+});
+
+// This is called when a user clicks on one of the buttons and recieves what button was clicked
+function clickButton(buttonClicked) {
+  switch(buttonClicked) {
     case "AC":
       document.getElementById("screen").value = "";
       break;
     case "=":
       let expression = document.getElementById("screen").value;
       if(expression != ""){
-        document.getElementById("screen").value = solve(expression);//eval(expression);
-        //console.log(expression+"="+eval(expression));
+        document.getElementById("screen").value = solve(expression);
       } else {
         document.getElementById("screen").value =  "invalid";
       }
 
       break;
     default:
-      document.getElementById("screen").value += operator;
+      let exp = document.getElementById("screen").value;
+      if(exp.length < 21){
+         document.getElementById("screen").value += operator;
+      }
       break;
   }
 }
@@ -22,16 +33,26 @@ function clickButton(operator) {
 
 function solve(expression){
   let postfix = infixToPostfix(expression);
+  if(postfix == -1) {
+    return "INVALID";
+  }
+  //console.log(postfix);
   let stack = [];
   for(let i = 0; i < postfix.length; i++){
     let character = postfix.charAt(i);
     if(character == ' '){
       continue;
-    } else if(!isNaN(character) && character != ' '){
+    } else if((!isNaN(character) && character != ' ') || character == 'N'){
       let num = "";
 
-      while((!isNaN(character) && character != ' ') || character == '.'){
-        num += character;
+      while((!isNaN(character) && character != ' ') || character == '.' || character == 'N'){
+        if(character == 'N'){
+          console.log("here");
+          num += '-';
+        }else {
+          num += character;
+        }
+
         i++;
         character = postfix.charAt(i);
       }
@@ -64,12 +85,12 @@ function solve(expression){
   return stack.pop();
 }
 
-function infixToPostfix(expression){
-
+function infixToPostfix(exp){
+  expression = checkExpression(exp);
   let result = "";
   let stack = [];
   for(let i = 0; i < expression.length; i++) {
-    if(expression[i] == '.'){
+    if(expression[i] == '.' || expression[i] == 'N'){
       result += expression[i];
       continue;
     }
@@ -91,7 +112,7 @@ function infixToPostfix(expression){
         result += stack.pop() + " ";
       }
 
-      if(stack.length > 0 && stack[stack.length - 1] != '('){
+      if(stack.length == 0){
         return -1;
       } else {
         stack.pop();
@@ -119,6 +140,50 @@ function infixToPostfix(expression){
   return result;
 }
 
+function checkExpression(exp) {
+  let len = exp.length;
+  for(let i = 0; i < len; i++){
+    let temp = "";
+    // Check if multiplication should be added case like 8(2) should be 8*(2)
+
+
+    // Check for opening parens and add multiplication
+    let newExp;
+    if(exp.charAt(i) == '(' && i != 0){
+      if(!isNaN(exp.charAt(i - 1))){
+        temp = exp.slice(0, i);
+        exp = temp + "*" + exp.slice(i);
+      } else if(exp.charAt(i - 1) == "N"){
+        temp = exp.slice(0,i);
+        exp = temp + "1*"  + exp.slice(i);
+      }
+    }
+
+    if(exp.charAt(i) == ')' && i != exp.length - 1){
+      if(!isNaN(exp.charAt(i + 1)) || exp.charAt(i + 1) == "(" || exp.charAt(i + 1) == "N"){
+        temp = exp.slice(0, i + 1);
+        exp = temp + "*" + exp.slice(i + 1);
+      }
+    }
+
+    if(exp.charAt(i) == '-'){
+      if(i == 0){
+        exp = "N"  + exp.slice(1);
+        //console.log("NEGATIVE IN FIRST POS");
+      }else if(isNaN(exp.charAt(i - 1))){
+        exp = exp.slice(0, i) + "N" + exp.slice(i+1);
+      }
+    }
+
+
+  }
+  return exp;
+}
+
+
+function newExpr(exp, i){
+
+}
 
 function pemdas(character) {
   switch(character){

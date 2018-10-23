@@ -7,26 +7,26 @@
 <body>
   <div class="container">
     <div class="calculator">
-      <div class="calc-item screen"><input id="screen" value=""></input></div>
+      <div class="calc-item screen"><input maxlength="21" on id="screen" value=""></input></div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">(</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">)</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">^</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">AC</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">7</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">8</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">9</div>
+      <div class="calc-item button clear" onclick="clickButton(this.innerHTML)">AC</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">7</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">8</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">9</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">/</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">4</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">5</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">6</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">4</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">5</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">6</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">*</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">1</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">2</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">3</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">1</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">2</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">3</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">+</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">.</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">0</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">=</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">0</div>
+      <div class="calc-item button" id="equals" onclick="clickButton(this.innerHTML)">=</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">-</div>
     </div>
     <p>Version 0.1.1</p>

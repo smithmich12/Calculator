@@ -17,6 +17,7 @@ p {
   height: 558px;
   background-color: #D7D7DA;
   border: 5px solid black;
+  border-radius: 10px;
 }
 
 .calculator {
@@ -26,10 +27,12 @@ p {
   grid-template-rows: repeat(6, 1fr);
   grid-gap: 5px;
   height: 548px;
-
+  border-radius: 10px;
 }
 
 .calc-item {
+
+  border-radius: 10px;
   background: #3D3C42;
   color: white;
   font-weight: bold;
@@ -44,9 +47,10 @@ p {
   text-align: right;
   background-color: #9C9F96;
   color: black;
-  font-size: 40px;
+  font-size: 25px;
   text-decoration: none;
   border: none;
+  border-radius: 10px;
   outline: none;
 }
 
@@ -63,10 +67,28 @@ p {
 }
 
 .calc-item.button{
+  user-select: none;
   grid-row: span 1;
   grid-column: span 1;
 }
+
+.calc-item.button.clear {
+  background-color: salmon;
+}
+
+.calc-item.button.num {
+  background-color: grey;
+}
+
 .calc-item.button:active{
+  background: grey;
+}
+
+.calc-item.button.num:active{
+  background: #3D3D3D;
+}
+
+.calc-item.button.clear:active{
   background: #3D3D3D;
 }
 
