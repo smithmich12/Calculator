@@ -7,8 +7,8 @@ document.getElementById("screen").addEventListener("keyup", function(event) {
 });
 
 // This is called when a user clicks on one of the buttons and recieves what button was clicked
-function clickButton(buttonClicked) {
-  switch(buttonClicked) {
+function clickButton(operator) {
+  switch(operator) {
     case "AC":
       document.getElementById("screen").value = "";
       break;
