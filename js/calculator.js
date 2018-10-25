@@ -8,27 +8,33 @@ document.getElementById("screen").addEventListener("keyup", function(event) {
 
 // This is called when a user clicks on one of the buttons and recieves what button was clicked
 function clickButton(operator) {
+  let screen = document.getElementById("screen");
   switch(operator) {
     case "AC":
-      document.getElementById("screen").value = "";
+      screen.value = "";
       break;
     case "=":
-      let expression = document.getElementById("screen").value;
-      if(expression != ""){
-        document.getElementById("screen").value = solve(expression);
-      } else {
-        document.getElementById("screen").value =  "invalid";
+      let expression = screen.value;
+      if((expression != "") && !(expression == "INVALID" || expression == "undefined" || expression == "NaN")){
+        screen.value = solve(expression);
       }
-
       break;
     default:
-      let exp = document.getElementById("screen").value;
-      if(exp.length < 21){
-         document.getElementById("screen").value += operator;
+      let exp = screen.value;
+
+      if(exp == "INVALID" || exp == "undefined" || exp == "NaN"){
+        screen.value = operator;
+      } else if(exp.length < 21) {
+        let location = screen.selectionStart;
+        let newExp = exp.slice(0, location) + operator + exp.slice(location);
+        screen.value = newExp;
+        screen.selectionStart = location + 1;
+        screen.selectionEnd = location + 1;
       }
       break;
   }
 }
+
 
 
 function solve(expression){

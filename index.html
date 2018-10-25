@@ -7,7 +7,7 @@
 <body>
   <div class="container">
     <div class="calculator">
-      <div class="calc-item screen"><input maxlength="21" on id="screen" value=""></input></div>
+      <div class="calc-item screen"><input maxlength="21" on id="screen" value="" onblur="this.focus()" autofocus></input></div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">(</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">)</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML)">^</div>
