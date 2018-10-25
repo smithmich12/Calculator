@@ -6,6 +6,7 @@ document.getElementById("screen").addEventListener("keyup", function(event) {
   }
 });
 
+
 // This is called when a user clicks on one of the buttons and recieves what button was clicked
 function clickButton(operator) {
   let screen = document.getElementById("screen");
@@ -28,8 +29,7 @@ function clickButton(operator) {
         let location = screen.selectionStart;
         let newExp = exp.slice(0, location) + operator + exp.slice(location);
         screen.value = newExp;
-        screen.selectionStart = location + 1;
-        screen.selectionEnd = location + 1;
+        screen.setSelectionRange(location + 1, location + 1);
       }
       break;
   }
