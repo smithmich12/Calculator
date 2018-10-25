@@ -54,6 +54,7 @@ p {
   border: none;
   border-radius: 10px;
   outline: none;
+  cursor: text;
 }
 
 .calc-item.screen input:focus{

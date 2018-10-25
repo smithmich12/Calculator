@@ -6,6 +6,9 @@ document.getElementById("screen").addEventListener("keyup", function(event) {
   }
 });
 
+document.getElementById("screen").addEventListener("blur", function(event){
+  event.target.focus();
+});
 
 // This is called when a user clicks on one of the buttons and recieves what button was clicked
 function clickButton(operator) {
@@ -26,6 +29,7 @@ function clickButton(operator) {
       if(exp == "INVALID" || exp == "undefined" || exp == "NaN"){
         screen.value = operator;
       } else if(exp.length < 21) {
+        
         let location = screen.selectionStart;
         let newExp = exp.slice(0, location) + operator + exp.slice(location);
         screen.value = newExp;
@@ -53,7 +57,6 @@ function solve(expression){
 
       while((!isNaN(character) && character != ' ') || character == '.' || character == 'N'){
         if(character == 'N'){
-          console.log("here");
           num += '-';
         }else {
           num += character;
