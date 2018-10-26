@@ -15,10 +15,6 @@ screenDiv.addEventListener("keyup", function(event) {
   }
 });
 
-screenDiv.addEventListener("blur", function(event){
-  event.target.focus();
-});
-
 function update() {
   document.getElementById("caretposition").innerHTML = getCaretPosition(screenDiv);
 }
