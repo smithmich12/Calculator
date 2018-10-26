@@ -1,39 +1,80 @@
+let screenDiv = document.getElementById("screen");
+
+// Event listeners to update caret position
+screenDiv.addEventListener('keyup', update, false);
+screenDiv.addEventListener('keydown', update, false);
+screenDiv.addEventListener('mousedown', update, false);
+screenDiv.addEventListener('mouseup', update, false);
+
+
 // Click equals button if user presses enter in the input
-document.getElementById("screen").addEventListener("keyup", function(event) {
+screenDiv.addEventListener("keyup", function(event) {
   event.preventDefault();
   if(event.keyCode === 13) {
     document.getElementById("equals").click();
   }
 });
 
-document.getElementById("screen").addEventListener("blur", function(event){
+screenDiv.addEventListener("blur", function(event){
   event.target.focus();
 });
 
+function update() {
+  document.getElementById("caretposition").innerHTML = getCaretPosition(screenDiv);
+}
+
+function getCaretPosition(screen){
+  let caretPos = 0, sel, range;
+  if(window.getSelection){
+    sel = window.getSelection();
+    if(sel.rangeCount){
+      range = sel.getRangeAt(0);
+      if(range.commonAncestorContainer.parentNode == screen){
+        caretPos = range.endOffset;
+      }
+    }
+  } else if (document.selection && document.selection.createRange) {
+    range = document.selection.createRange();
+    if(range.parentElement() == screen) {
+      let tempEl = document.createElement("span");
+      screen.insertBefore(tempEl, screen.firstChild);
+      let tempRange = range.duplicate();
+      tempRange.moveToElementText(tempEl);
+      tempRange.setEndPoint("EndToEnd", range);
+      caretPos = tempRange.text.length;
+    }
+  }
+  return caretPos;
+}
+
+
+
 // This is called when a user clicks on one of the buttons and recieves what button was clicked
 function clickButton(operator) {
-  let screen = document.getElementById("screen");
+  let caretpositionDiv = document.getElementById("caretposition")
   switch(operator) {
     case "AC":
-      screen.value = "";
+      screenDiv.innerHTML = "";
+      caretpositionDiv.innerHTML = "0"
       break;
     case "=":
-      let expression = screen.value;
-      if((expression != "") && !(expression == "INVALID" || expression == "undefined" || expression == "NaN")){
-        screen.value = solve(expression);
+      let expression = screenDiv.innerHTML;
+      if((expression != "") && !(expression == "Parenthesis Error" || expression == "Division by 0")){
+        screenDiv.innerHTML = solve(expression);
       }
+      caretpositionDiv.innerHTML = screenDiv.innerText.length;
       break;
     default:
-      let exp = screen.value;
+      let exp = screenDiv.innerHTML;
 
-      if(exp == "INVALID" || exp == "undefined" || exp == "NaN"){
-        screen.value = operator;
+      if(exp == "Parenthesis Error" || exp == "Operator Syntax Error" || exp == "\u221E" || exp == "Division by 0"){
+        screenDiv.innerHTML = operator;
       } else if(exp.length < 21) {
-        
-        let location = screen.selectionStart;
+
+        let location = caretpositionDiv.innerHTML;
         let newExp = exp.slice(0, location) + operator + exp.slice(location);
-        screen.value = newExp;
-        screen.setSelectionRange(location + 1, location + 1);
+        screenDiv.innerHTML = newExp;
+        caretpositionDiv.innerHTML++;
       }
       break;
   }
@@ -41,12 +82,13 @@ function clickButton(operator) {
 
 
 
+
 function solve(expression){
   let postfix = infixToPostfix(expression);
   if(postfix == -1) {
-    return "INVALID";
+    return "Parenthesis Error";
   }
-  //console.log(postfix);
+  let operators = ["+", "-", "*", "/", "^"];
   let stack = [];
   for(let i = 0; i < postfix.length; i++){
     let character = postfix.charAt(i);
@@ -70,7 +112,10 @@ function solve(expression){
     } else {
       let val1 = stack.pop();
       let val2 = stack.pop();
-      //console.log(val1);
+      console.log(val1 + " " + val2);
+      if(val1 == undefined || val2 == undefined){
+        return "Operator Syntax Error";
+      }
       switch(character){
         case '+':
           stack.push(val1+val2);
@@ -79,7 +124,12 @@ function solve(expression){
           stack.push(val2-val1);
           break;
         case '/':
-          stack.push(val2/val1);
+        if(val1 == 0){
+          return "Division by 0";
+        } else {
+            stack.push(val2/val1);
+        }
+
           break;
         case '*':
           stack.push(val1*val2);
@@ -90,8 +140,11 @@ function solve(expression){
       }
     }
   }
-
-  return stack.pop();
+  let returnVal = stack.pop();
+  if(returnVal == "Infinity") {
+    return '\u221E';
+  }
+  return returnVal;
 }
 
 function infixToPostfix(exp){
@@ -127,7 +180,7 @@ function infixToPostfix(exp){
         stack.pop();
       }
     }else{
-      while(stack.length > 0 && pemdas(expression[i]) <= pemdas(stack[stack.length - 1])){
+      while(stack.length > 0 && pemdas(expression[i]) <= pemdas(stack[stack.length - 1]) && (expression[i] != stack[stack.length - 1])){
         result += stack.pop() + " ";
       }
 
