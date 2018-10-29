@@ -1,13 +1,25 @@
+/********************************
+ * Michael Smith
+ * Last Updated: October 28, 2018
+ * Lab 3 - CS 480
+ * CSS to format the Calculator page
+ ********************************/
 html, body{
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'Baloo Bhaijaan', cursive;
 
   height: 100%;
   width: 100%;
   margin: 0;
 }
+
 p {
   text-align: center;
 }
+
+#caretposition {
+  visibility: hidden;
+}
+
 .container {
   position: absolute;
   margin: auto;
@@ -37,7 +49,8 @@ p {
   border-radius: 10px;
   background: #3D3C42;
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
+  font-size: 23px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +61,7 @@ p {
   color: black;
   grid-row: span 1;
   grid-column: span 4;
-  font-size: 18px;
+  /* font-size: 23px; */
   text-align: right;
   justify-content:flex-end;
 }

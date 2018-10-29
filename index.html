@@ -1,36 +1,42 @@
+<!--
+  Michael Smith
+  Last Updated: October 28, 2018
+  Lab 3 - CS 480
+  HTML for the Calculator
+-->
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 <link rel="stylesheet" href="./css/index.css"/>
-<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan" rel="stylesheet">
 
 <body>
   <div class="container">
     <div class="calculator">
-      <div class="calc-item screen" contenteditable="true" id="screen"> </div><!--<input maxlength="21" on id="screen" value="" readonly></input></div>-->
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">(</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">)</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">^</div>
-      <div class="calc-item button clear" onclick="clickButton(this.innerHTML)">AC</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">7</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">8</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">9</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">/</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">4</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">5</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">6</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">*</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">1</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">2</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">3</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">+</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">.</div>
-      <div class="calc-item button num" onclick="clickButton(this.innerHTML)">0</div>
-      <div class="calc-item button" id="equals" onclick="clickButton(this.innerHTML)">=</div>
-      <div class="calc-item button" onclick="clickButton(this.innerHTML)">-</div>
+      <div class="calc-item screen" contenteditable="true" id="screen"></div><!--<input maxlength="21" on id="screen" value="" readonly></input></div>-->
+      <div class="calc-item button" onclick="clickButton(this.innerHTML);">(</div>
+      <div class="calc-item button" onclick="clickButton(this.innerHTML);">)</div>
+      <div class="calc-item button" onclick="clickButton(this.innerHTML);">^</div>
+      <div class="calc-item button clear" onclick="clickButton(this.innerHTML);" ondblclick="clearScreen();"><</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">7</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">8</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">9</div>
+      <div class="calc-item button" onclick="clickButton(this.innerHTML);">/</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">4</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">5</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">6</div>
+      <div class="calc-item button" onclick="clickButton(this.innerHTML);">*</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">1</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">2</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">3</div>
+      <div class="calc-item button" onclick="clickButton(this.innerHTML);">+</div>
+      <div class="calc-item button" onclick="clickButton(this.innerHTML);">.</div>
+      <div class="calc-item button num" onclick="clickButton(this.innerHTML);">0</div>
+      <div class="calc-item button" id="equals" onclick="clickButton(this.innerHTML);">=</div>
+      <div class="calc-item button" onclick="clickButton(this.innerHTML);">-</div>
     </div>
-    <p>Version 0.2.3</p>
+    <p>Version 0.3.0</p>
     <div id="caretposition"></div>
   </div>
 </body>
