@@ -1,0 +1,11 @@
+There are two ways to access my calculator
+
+1. Open up Google Chrome.
+2. Go to https://smithmich12.github.io/calc
+3. Use the calculator
+
+- or -
+
+1. Right click on index.html
+2. Open with Google Chrome
+3. Use the calculator
