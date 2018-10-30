@@ -18,7 +18,9 @@
       <div class="calc-item button" onclick="clickButton(this.innerHTML);">(</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML);">)</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML);">^</div>
-      <div class="calc-item button clear" onclick="clickButton(this.innerHTML);" ondblclick="clearScreen();"><</div>
+      <div class="calc-item button clear tooltip" onclick="clickButton(this.innerHTML.charAt(0));" ondblclick="clearScreen();">Del
+        <span class="tooltiptext">Double click to clear</span>
+      </div>
       <div class="calc-item button num" onclick="clickButton(this.innerHTML);">7</div>
       <div class="calc-item button num" onclick="clickButton(this.innerHTML);">8</div>
       <div class="calc-item button num" onclick="clickButton(this.innerHTML);">9</div>
@@ -36,7 +38,7 @@
       <div class="calc-item button" id="equals" onclick="clickButton(this.innerHTML);">=</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML);">-</div>
     </div>
-    <p>Version 0.3.0</p>
+    <p>Version 1.0.0</p>
     <div id="caretposition"></div>
   </div>
 </body>

@@ -6,10 +6,11 @@
  ********************************/
 html, body{
   font-family: 'Baloo Bhaijaan', cursive;
-
   height: 100%;
   width: 100%;
   margin: 0;
+  background: #333;
+  color: white;
 }
 
 p {
@@ -66,6 +67,10 @@ p {
   justify-content:flex-end;
 }
 
+.calc-item.screen:focus {
+  outline: 0;
+}
+
 .calc-item.button{
   user-select: none;
   grid-row: span 1;
@@ -74,6 +79,7 @@ p {
 
 .calc-item.button.clear {
   background-color: salmon;
+  position: relative;
 }
 
 .calc-item.button.num {
@@ -95,4 +101,23 @@ p {
 .calc-item.zero {
   grid-row: span 1;
   grid-column: span 2;
+}
+
+.clear .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px 0;
+  font-size: 15px;
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  left: 120%;
+}
+
+.clear:hover .tooltiptext {
+  visibility: visible;
 }
