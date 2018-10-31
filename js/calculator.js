@@ -201,10 +201,11 @@ function parenBalance(exp){
 // Called on every keypress, only allows numbers and operators
 // If enter is pressed it calls equals
 function checkChar(event) {
+  let exp = screenDiv.innerHTML;
   let keyCode = event.keyCode;
   let otherKeys = [13, 40, 41, 42, 43, 45, 46, 47, 94]
   if(keyCode != 0){
-    if (!(keyCode >= 48 && keyCode <= 57) && !(otherKeys.includes(keyCode)) || !checkPrevious(event.key)) {
+    if (!(keyCode >= 48 && keyCode <= 57) && !(otherKeys.includes(keyCode)) || !checkPrevious(event.key) && exp.length < 21) {
       event.preventDefault();
     } else if (keyCode === 13){
       event.preventDefault();
