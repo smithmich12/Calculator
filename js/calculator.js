@@ -25,7 +25,7 @@ function clickButton(operator) {
       let expr = screenDiv.innerHTML;
       if((expr != "") && // Make sure the user's input isn't empty and an error message isn't showing
       !(expr == "Parenthesis Error" || expr == "Syntax Error" || expr == "\u221E" || expr == "Division by 0")
-      && !expr.includes("e")) // if user presses enter whith e syntax ex: 6.5e+100
+      && !expr.includes("e") && parenBalance(expr)) // if user presses enter with e syntax ex: 6.5e+100
       {
         screenDiv.innerHTML = solve(expr);
       }
@@ -34,13 +34,11 @@ function clickButton(operator) {
 
     // This is the default case to append the users input
     default:
-      let check = ["+", "*", "/", "^", ".", "-"];
       let exp = screenDiv.innerHTML;
       if(exp == "Parenthesis Error" || exp == "Syntax Error" || exp == "\u221E" || exp == "Division by 0"){
         screenDiv.innerHTML = operator;
-      } else if(exp.length < 21 && checkPrevious(operator)) { //&& (!check.includes(exp.charAt(exp.length - 1)))) {
+      } else if(exp.length < 21 && checkPrevious(operator)) {
         let location = caretpositionDiv.innerHTML;
-        //let newExp = exp.slice(0, location) + operator + exp.slice(location);
         screenDiv.innerHTML = exp.slice(0, location) + operator + exp.slice(location);
         caretpositionDiv.innerHTML++;
       }
@@ -179,6 +177,27 @@ function infixToPostfix(exp){
 // Event listener to check if an illegal character is pressed
 screenDiv.addEventListener("keypress", checkChar, false);
 
+// Check if the number of '(' matches the number of ')'
+function parenBalance(exp){
+  let open = [];
+  let close = [];
+  let i = -1, k = -1;
+  while((i = exp.indexOf("(", i + 1)) >= 0) open.push(i);
+  while((k = exp.indexOf(")", k + 1)) >= 0) close.push(k);
+
+  if(open.length == close.length) {
+    return true;
+  } else {
+    let error = document.getElementById("error");
+    error.innerHTML = "Parenthesis Mismatch";
+    error.style.display = 'block';
+    setTimeout(function(){error.style.display = 'none';}, 3000);
+
+
+    return false;
+  }
+}
+
 // Called on every keypress, only allows numbers and operators
 // If enter is pressed it calls equals
 function checkChar(event) {
@@ -216,6 +235,10 @@ function checkPrevious(pressed) {
     }
     // Disallows adding back to back operators
     if(check.includes(lastChar) && check.includes(pressed)){
+      return false;
+    }
+    // Disallows closing a blank statment ex: ()
+    if(lastChar == "(" && pressed == ')' ){
       return false;
     }
   } else {

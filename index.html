@@ -35,10 +35,13 @@
       <div class="calc-item button" onclick="clickButton(this.innerHTML);">+</div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML);">.</div>
       <div class="calc-item button num" onclick="clickButton(this.innerHTML);">0</div>
-      <div class="calc-item button" id="equals" onclick="clickButton(this.innerHTML);">=</div>
+      <div class="calc-item button" id="equals" onclick="clickButton(this.innerHTML.charAt(0));">=
+
+      </div>
       <div class="calc-item button" onclick="clickButton(this.innerHTML);">-</div>
     </div>
-    <p>Version 1.0.0</p>
+    <p>Version 1.0.1</p>
+    <span id="error"></span>
     <div id="caretposition"></div>
   </div>
 </body>

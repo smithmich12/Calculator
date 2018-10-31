@@ -75,11 +75,11 @@ p {
   user-select: none;
   grid-row: span 1;
   grid-column: span 1;
+  position: relative;
 }
 
 .calc-item.button.clear {
   background-color: salmon;
-  position: relative;
 }
 
 .calc-item.button.num {
@@ -116,6 +116,13 @@ p {
   z-index: 1;
   top: 8px;
   left: 120%;
+}
+
+#error {
+  display: none;
+  color: red;
+  text-align: center;
+  font-size: 15px;
 }
 
 .clear:hover .tooltiptext {
