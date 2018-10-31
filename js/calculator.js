@@ -288,7 +288,7 @@ function checkExpression(exp) {
         } else {
           exp = "N"  + exp.slice(1);
         }
-      }else if(isNaN(exp.charAt(i - 1))){
+      }else if(isNaN(exp.charAt(i - 1)) && exp.charAt(i - 1) != ")"){
         exp = exp.slice(0, i) + "N" + exp.slice(i+1);
 
       }
