@@ -238,7 +238,7 @@ function checkPrevious(pressed) {
       return false;
     }
     // Disallows closing a blank statment ex: ()
-    if(lastChar == "(" && pressed == ')' ){
+    if(lastChar == "(" && (pressed == ')' || (check.includes(pressed) && pressed != '-'))) {
       return false;
     }
   } else {
