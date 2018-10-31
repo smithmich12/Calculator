@@ -49,6 +49,7 @@ function clickButton(operator) {
 // This takes the postfix expression and solves it.
 function solve(expression){
   let postfix = infixToPostfix(expression);
+  console.log(postfix);
   if(postfix == -1) {
     return "Parenthesis Error";
   }
@@ -149,7 +150,7 @@ function infixToPostfix(exp){
         stack.pop();
       }
     }else{
-      while(stack.length > 0 && pemdas(expression[i]) <= pemdas(stack[stack.length - 1]) && (expression[i] != stack[stack.length - 1])){
+      while(stack.length > 0 && pemdas(expression[i]) <= pemdas(stack[stack.length - 1])){
         result += stack.pop() + " ";
       }
       stack.push(expression[i]);
